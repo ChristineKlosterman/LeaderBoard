@@ -9,7 +9,7 @@ export class AccountController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
   }
-
+//test push
   async getUserAccount(req, res, next) {
     try {
       const account = await accountService.getAccount(req.userInfo)
