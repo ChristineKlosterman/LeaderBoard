@@ -1,4 +1,11 @@
+import { dbContext } from "../db/DbContext.js";
+
 class GamesService {
+    async create(newGame) {
+        const game = await dbContext.Games.create(newGame)
+        await game.populate('match',)
+        return game
+    } 
     delete() {
         throw new Error("Method not implemented.");
     }
@@ -8,9 +15,6 @@ class GamesService {
     getAll() {
         throw new Error("Method not implemented.");
     }
-    create() {
-        throw new Error("Method not implemented.");
-    } 
     
 }
 
