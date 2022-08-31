@@ -3,7 +3,7 @@ import { dbContext } from "../db/DbContext.js";
 class GamesService {
     async create(newGame) {
         const game = await dbContext.Games.create(newGame)
-        await game.populate('match',)
+        await game.populate('match',) //TODO figure out what to populate
         return game
     } 
     delete() {
