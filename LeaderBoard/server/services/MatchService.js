@@ -5,7 +5,7 @@ class MatchService {
 
 
     async createMatch(newMatch) {
-        const match = await dbContext.Matches.create(newMatch)
+        const match = await dbContext.Match.create(newMatch)
         await match.populate('player', 'name picture')
 
     }
