@@ -4,7 +4,7 @@ import { dbContext } from "../db/DbContext.js";
 class GamesService {
     async create(newGame) {
         const game = await dbContext.Games.create(newGame)
-         return game
+        return game
     }
     async getAll() {
         const games = await dbContext.Games.find().sort({ createAt: -1 })
@@ -20,7 +20,7 @@ class GamesService {
     async delete(gameId, userId) {
         const game = await this.getById(gameId)
         // @ts-ignore
-        if(!game.creatorId.toString() != userId){
+        if(game.creatorId.toString() != userId){
             throw new Forbidden('You dont have permission to delete this game')
         }
         await game.remove()

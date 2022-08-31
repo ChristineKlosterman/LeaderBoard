@@ -5,29 +5,29 @@ import { matchesService } from "../services/MatchesService.js";
 import BaseController from "../utils/BaseController.js";
 
 
-export class GamesController extends BaseController{
-    constructor(){
+export class GamesController extends BaseController {
+    constructor() {
         super('/api/games')
         this.router
-        .get('', this.getAll)
-        .get('/:id', this.getById)
-        .get('/:id/profiles', this.getProfiles)
-        .get('/:id/matches', this.getRecentMatches)
-        .use(Auth0Provider.getAuthorizedUserInfo)
-        .post('',this.create)
-        .delete(':/id', this.delete)
-        
+            .get('', this.getAll)
+            .get('/:id', this.getById)
+            .get('/:id/profiles', this.getProfiles)
+            .get('/:id/matches', this.getRecentMatches)
+            .use(Auth0Provider.getAuthorizedUserInfo)
+            .post('', this.create)
+            .delete('/:id', this.delete)
+
     }
-    async create(req, res, next){
+    async create(req, res, next) {
         try {
             req.body.creatorId = req.userInfo.id
-         const game = await gamesService.create(req.body)   
-         return res.send(game)
+            const game = await gamesService.create(req.body)
+            return res.send(game)
         } catch (error) {
             next(error)
         }
     }
-    async getAll(req, res, next){
+    async getAll(req, res, next) {
         try {
             const games = await gamesService.getAll()
             return res.send(games)
@@ -35,7 +35,7 @@ export class GamesController extends BaseController{
             next(error)
         }
     }
-    async getById(req, res, next){
+    async getById(req, res, next) {
         try {
             const games = await gamesService.getById(req.params.id)
             return res.send(games)
@@ -43,7 +43,7 @@ export class GamesController extends BaseController{
             next(error)
         }
     }
-    async delete(req, res, next){
+    async delete(req, res, next) {
         try {
             const games = await gamesService.delete(req.params.id, req.userInfo.id)
             return res.send(games)
@@ -51,7 +51,7 @@ export class GamesController extends BaseController{
             next(error)
         }
     }
-    async getProfiles(req, res, next){
+    async getProfiles(req, res, next) {
         try {
             const players = await accountService.getAccount
             return res.send(players)
@@ -59,7 +59,7 @@ export class GamesController extends BaseController{
             next(error)
         }
     }
-    async getRecentMatches(req, res, next){
+    async getRecentMatches(req, res, next) {
         try {
             const matches = await matchesService.getMatchesByGameId(req.params.id)
             return res.send(matches)

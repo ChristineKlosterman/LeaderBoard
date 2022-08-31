@@ -12,7 +12,7 @@ coverImg:{type: String, required: true},
 minPlayer:{type: Number, required: true},
 maxPlayer:{type: Number, required: true},
 type:{type: String, enum :[
-    'card game', 'board game', 'video game', 'sports'
+    'card game', 'board game', 'video game', 'sport'
 ], required: true},
 })
 
