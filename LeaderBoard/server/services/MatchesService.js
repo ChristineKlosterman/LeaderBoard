@@ -1,7 +1,7 @@
 import { dbContext } from "../db/DbContext"
 
 
-class MatchService {
+class MatchesService {
 
 
     async createMatch(newMatch) {
@@ -9,7 +9,7 @@ class MatchService {
         const game = await dbContext.Games.findById(newMatch.gameId)
 
         const match = await dbContext.Matches.create(newMatch)
-        await match.populate('player', 'name picture')
+        await match.populate('players', 'name picture')
         await match.populate('game')
         // @ts-ignore
         await game.save()
@@ -17,7 +17,7 @@ class MatchService {
     }
 
     async getMatchesByGameId(gameId) {
-        const matches = await dbContext.Matches.find({ gameId }).populate('profile', 'name picture')
+        const matches = await dbContext.Matches.find({ gameId }).populate('players', 'name picture')
         return matches
     }
 
@@ -29,4 +29,4 @@ class MatchService {
 
 
 
-export const matchSchema = new MatchService()
+export const matchesService = new MatchesService()
