@@ -4,6 +4,7 @@ const ObjectId = Schema.Types.ObjectId
 
 export const GameSchema = new Schema ({
 name:{type: String, required: true},
+creatorId:{type: ObjectId, required: true},
 description:{type: String, required: true, maxlength: 200},
 rules:{type: String, required: true, maxlength: 300},
 img:{type: String, required: true},
