@@ -8,9 +8,9 @@ class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
 
-  Game = mongoose.model('Game', GameSchema);
+  Games = mongoose.model('Game', GameSchema);
 
-  Match = mongoose.model('Match', MatchSchema);
+  Matches = mongoose.model('Match', MatchSchema);
 }
 
 export const dbContext = new DbContext()
