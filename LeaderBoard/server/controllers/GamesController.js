@@ -7,12 +7,12 @@ import BaseController from "../utils/BaseController.js";
 
 export class GamesController extends BaseController {
     constructor() {
-        super('/api/games')
+        super('api/games')
         this.router
             .get('', this.getAll)
             .get('/:id', this.getById)
-            .get('/:id/profiles', this.getProfiles)
-            .get('/:id/matches', this.getRecentMatches)
+            .get('/:id/profiles', this.getProfilesByGameId)
+            .get('/:id/matches', this.getMatchesByGameId)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.create)
             .delete('/:id', this.delete)
@@ -51,7 +51,7 @@ export class GamesController extends BaseController {
             next(error)
         }
     }
-    async getProfiles(req, res, next) {
+    async getProfilesByGameId(req, res, next) {
         try {
             const players = await accountService.getAccount
             return res.send(players)
@@ -59,7 +59,7 @@ export class GamesController extends BaseController {
             next(error)
         }
     }
-    async getRecentMatches(req, res, next) {
+    async getMatchesByGameId(req, res, next) {
         try {
             const matches = await matchesService.getMatchesByGameId(req.params.id)
             return res.send(matches)

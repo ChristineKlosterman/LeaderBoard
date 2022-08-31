@@ -4,8 +4,8 @@ const ObjectId = Schema.Types.ObjectId
 export const MatchSchema = new Schema({
     gameId: { type: ObjectId, required: true, ref: 'Game' },
     playerIds: [{ type: ObjectId, required: true, ref: 'Account' }],
-    winnerId: { type: ObjectId, required: true, ref: 'Account' },
-    groupId: { type: ObjectId },
+    winnerId: { type: ObjectId, required: false, ref: 'Account' },
+    // groupId: { type: ObjectId, required: false, ref: 'Group' },
 },
     { timestamps: true, toJSON: { virtuals: true } }
 )
