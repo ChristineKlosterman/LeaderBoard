@@ -16,7 +16,10 @@ class MatchService {
         return match
     }
 
-    async getMatches
+    async getMatchesByGameId(gameId) {
+        const matches = await dbContext.Match.find({ gameId }).populate('profile', 'name picture')
+        return matches
+    }
 }
 
 
