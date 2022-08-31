@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { accountService } from "../services/AccountService.js";
 import { gamesService } from "../services/GamesService.js";
+import { matchesService } from "../services/MatchesService.js";
 import BaseController from "../utils/BaseController.js";
 
 
