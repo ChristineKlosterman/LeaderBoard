@@ -6,9 +6,9 @@ class MatchService {
 
     async createMatch(newMatch) {
 
-        const game = await dbContext.Game.findById(newMatch.gameId)
+        const game = await dbContext.Games.findById(newMatch.gameId)
 
-        const match = await dbContext.Match.create(newMatch)
+        const match = await dbContext.Matches.create(newMatch)
         await match.populate('player', 'name picture')
         await match.populate('game')
         // @ts-ignore
@@ -17,7 +17,12 @@ class MatchService {
     }
 
     async getMatchesByGameId(gameId) {
-        const matches = await dbContext.Match.find({ gameId }).populate('profile', 'name picture')
+        const matches = await dbContext.Matches.find({ gameId }).populate('profile', 'name picture')
+        return matches
+    }
+
+    async getMatchesByAccountId(accountId) {
+        let matches = await dbContext.Matches.find({ accountId: accountId }).populate('game')
         return matches
     }
 }
