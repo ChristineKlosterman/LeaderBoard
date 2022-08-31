@@ -60,7 +60,7 @@ export class GamesController extends BaseController{
     }
     async getRecentMatches(req, res, next){
         try {
-            const matches = await gamesService.getMatchesByGameId(req.params.id)
+            const matches = await matchesService.getMatchesByGameId(req.params.id)
             return res.send(matches)
         } catch (error) {
             next(error)
