@@ -10,7 +10,8 @@ export class GamesController extends BaseController{
     }
     async create(req, res, next){
         try {
-         const game = await gamesService.create()   
+            req.body.creatorId = req.userInfo.id
+         const game = await gamesService.create(req.body)   
          return res.send(game)
         } catch (error) {
             next(error)
@@ -19,7 +20,7 @@ export class GamesController extends BaseController{
     async getAll(req, res, next){
         try {
             const games = await gamesService.getAll()
-            
+            return res.send(games)
         } catch (error) {
             next(error)
         }
