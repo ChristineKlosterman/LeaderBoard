@@ -14,6 +14,7 @@ export class GamesController extends BaseController {
             .get('/:id/profiles', this.getProfilesByGameId)
             .get('/:id/matches', this.getMatchesByGameId)
             .use(Auth0Provider.getAuthorizedUserInfo)
+            .put('/:id', this.editGame)
             .post('', this.create)
             .delete('/:id', this.delete)
 
@@ -63,6 +64,16 @@ export class GamesController extends BaseController {
         try {
             const matches = await matchesService.getMatchesByGameId(req.params.id)
             return res.send(matches)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async editGame(req, res, next) {
+        try {
+            let gameData = req.body
+            let game = await gamesService.editGame(req.params.id, gameData, req.userInfo.id)
+            res.send(game)
         } catch (error) {
             next(error)
         }
