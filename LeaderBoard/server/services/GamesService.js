@@ -26,7 +26,6 @@ class GamesService {
         await game.remove()
         return game
     }
-
     async editGame(id, gameData, userId) {
         let game = await this.getById(id)
         // @ts-ignore
