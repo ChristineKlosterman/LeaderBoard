@@ -29,6 +29,7 @@ class GamesService {
 
     async editGame(id, gameData, userId) {
         let game = await this.getById(id)
+        // @ts-ignore
         if (game.creatorId.toString() != userId) {
             throw new Forbidden('not authorized')
         }

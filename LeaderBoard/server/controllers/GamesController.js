@@ -52,6 +52,15 @@ export class GamesController extends BaseController {
             next(error)
         }
     }
+    async editGame(req, res, next) {
+        try {
+            let gameData = req.body
+            let game = await gamesService.editGame(req.params.id, gameData, req.userInfo.id)
+            res.send(game)
+        } catch (error) {
+            next(error)
+        }
+    }
     async getProfilesByGameId(req, res, next) {
         try {
             const players = await accountService.getAccount
@@ -64,16 +73,6 @@ export class GamesController extends BaseController {
         try {
             const matches = await matchesService.getMatchesByGameId(req.params.id)
             return res.send(matches)
-        } catch (error) {
-            next(error)
-        }
-    }
-
-    async editGame(req, res, next) {
-        try {
-            let gameData = req.body
-            let game = await gamesService.editGame(req.params.id, gameData, req.userInfo.id)
-            res.send(game)
         } catch (error) {
             next(error)
         }
